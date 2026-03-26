@@ -5,7 +5,7 @@ env:
 
 on:
   schedule:
-    - cron: "0 0 * * *"   # Runs daily (UTC time)
+    - cron: "*/5 * * * *"   # every 5 minutes  
   workflow_dispatch:       # Allow manual run
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
 
       - name: Update README
         run: |
-          echo "Last updated: $(date)" >> README.md
+          echo "Last updated: $(date +'%Y-%m-%d %H:%M:%S')" >> README.md
 
       - name: Commit changes
         run: |
@@ -27,3 +27,6 @@ jobs:
           git add README.md
           git commit -m "Daily README update" || echo "No changes to commit"
           git push
+
+      - name: Show SHA
+        run: echo "Commit SHA: $GITHUB_SHA"
