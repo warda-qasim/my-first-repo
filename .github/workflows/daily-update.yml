@@ -26,7 +26,3 @@ jobs:
           git add README.md
           git commit -m "Auto update $(date)" || echo "No changes"
           git push
-
-      - name: Show SHA
-        run: |
-           echo "Commit SHA: $GITHUB_SHA"
